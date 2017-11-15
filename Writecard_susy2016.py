@@ -16,7 +16,7 @@ masses=open(aux_shapes+'scanpointname.txt').read().splitlines()
 
 chns = ['eg', 'egg', 'mg', 'mgg']
 
-infile = {'eg':'Oct28_ELE.root', 'egg':'Oct28_ELE.root', 'mg':'Oct28_Mu.root','mgg':'Oct28_Mu.root'}
+infile = {'eg':'Nov9_ELE.root', 'egg':'Nov9_ELE.root', 'mg':'Nov9_Mu.root','mgg':'Nov9_Mu.root'}
 
 bkg_procs = { 'eg':["TT", "WJets", "ZJets","ST","Wgamma","Zgamma","TTV","TTG","VV"],
               'egg':["TT", "WJets","ST","Wgamma","Zgamma","TTV","TTG","VV"],
@@ -31,10 +31,10 @@ sig_procs = ['SMS_T6ttZg']
 #   (2, "Aug2_ELE_pfMET_SR2_ele_bjj"),
 #]
 cats = {
-'eg':[(1, "Oct28_ELE_pfMET_SR1_ele_bjj")],
-'egg':[(1, "Oct28_ELE_pfMET_SR2_ele_bjj")],
-'mg':[(1, "Oct28_Mu_pfMET_SR1_mu_bjj")],
-'mgg':[(1, "Oct28_Mu_pfMET_SR2_mu_bjj")] 
+'eg':[(1, "Nov9_ELE_pfMET_SR1_ele_bjj")],
+'egg':[(1, "Nov9_ELE_pfMET_SR2_ele_bjj")],
+'mg':[(1, "Nov9_Mu_pfMET_SR1_mu_bjj")],
+'mgg':[(1, "Nov9_Mu_pfMET_SR2_mu_bjj")] 
 }
 
 
@@ -72,6 +72,7 @@ cb.cp().signals().AddSyst(cb, "lumi_$ERA", "lnN", ch.SystMap('era')(["13TeV"],1.
 #cb.cp().process([sig_procs+["TT", "WJets", "ZJets","ST","Wgamma","Zgamma","TTV","TTG","VV"]]).AddSyst(
 cb.cp().process(sig_procs+["TT", "WJets", "ZJets","ST","Wgamma","Zgamma","TTV","TTG","VV"]).AddSyst(
     cb, 'BbtagWeight', "shape", ch.SystMap()(1.0))
+cb.cp().channel(['mg','mgg']).process(["TT","TTV","TTG"]).AddSyst(cb, 'BtopPtWeight',"shape",ch.SystMap()(1.0))
 cb.cp().channel(['mg','mgg']).process(["TT", "WJets", "ZJets","ST","Wgamma","Zgamma","TTV","TTG","VV"]).AddSyst(cb, 'BJES',"shape",ch.SystMap()(1.0))
 #cb.cp().channel(['mgg']).process(["TT", "WJets", "ZJets","ST","Wgamma","Zgamma","TTV","TTG","VV"]).AddSyst(cb, 'BJES',"shape",ch.SystMap()(1.0))
 cb.cp().channel(['mg','mgg']).process(["TT", "WJets", "ZJets","ST","Wgamma","Zgamma","TTV","TTG","VV"]).AddSyst(cb, 'BmuWeight',"shape",ch.SystMap()(1.0))
@@ -82,7 +83,7 @@ cb.cp().channel(['mg']).process(["TTG"]).AddSyst(cb,"gpuritysf","lnN",ch.SystMap
 cb.cp().channel(['mgg']).process(["TTG"]).AddSyst(cb,"gpuritysf","lnN",ch.SystMap()(1.017))
 cb.cp().channel(['mg','mgg']).process(["WJets"]).AddSyst(cb,"jetm3_wSF","lnN",ch.SystMap()(1.012))
 
-
+cb.cp().channel(['eg','egg']).process(["TT","TTV","TTG"]).AddSyst(cb, 'BtopPtWeight',"shape",ch.SystMap()(1.0))
 cb.cp().channel(['eg','egg']).process(["TT", "WJets", "ZJets","ST","Wgamma","Zgamma","TTV","TTG","VV"]).AddSyst(cb, 'BJES',"shape",ch.SystMap()(1.0))
 #cb.cp().channel(['egg']).process(["TT", "WJets", "ZJets","ST","Wgamma","Zgamma","TTV","TTG","VV"]).AddSyst(cb, 'BJES',"shape",ch.SystMap()(1.0))
 cb.cp().channel(['eg','egg']).process(["TT", "WJets", "ZJets","ST","Wgamma","Zgamma","TTV","TTG","VV"]).AddSyst(cb, 'BeleWeight',"shape",ch.SystMap()(1.0))
@@ -126,18 +127,18 @@ writer = ch.CardWriter('$TAG/$ANALYSIS_$CHANNEL_$BINID_$ERA_$MASS.txt',
 #for b in bins :
 for m in masses :
 #        print "Writing datacard for bin: " +b + " and mass: " + m+"\n" 
-        writer.WriteCards('outputest/datacardsOct28/'+m+'/All', cb.cp().mass([m,"*"]))
+        writer.WriteCards('outputest/datacardsNov9/'+m+'/All', cb.cp().mass([m,"*"]))
         for b in bins[0:2]:
-            writer.WriteCards('outputest/datacardsOct28/'+m+'/ELE', cb.cp().mass([m,"*"]).bin([b]))
+            writer.WriteCards('outputest/datacardsNov9/'+m+'/ELE', cb.cp().mass([m,"*"]).bin([b]))
         for b in bins[2:4]:
-            writer.WriteCards('outputest/datacardsOct28/'+m+'/MU', cb.cp().mass([m,"*"]).bin([b]))
+            writer.WriteCards('outputest/datacardsNov9/'+m+'/MU', cb.cp().mass([m,"*"]).bin([b]))
         for b in [bins[0],bins[2]]:
-            writer.WriteCards('outputest/datacardsOct28/'+m+'/SR1', cb.cp().mass([m,"*"]).bin([b]))
+            writer.WriteCards('outputest/datacardsNov9/'+m+'/SR1', cb.cp().mass([m,"*"]).bin([b]))
         for b in [bins[1],bins[3]]:
-            writer.WriteCards('outputest/datacardsOct28/'+m+'/SR2', cb.cp().mass([m,"*"]).bin([b]))
+            writer.WriteCards('outputest/datacardsNov9/'+m+'/SR2', cb.cp().mass([m,"*"]).bin([b]))
 
         for b in bins:
-            writer.WriteCards('outputest/datacardsOct28/'+m+'/'+b, cb.cp().mass([m,"*"]).bin([b]))
+            writer.WriteCards('outputest/datacardsNov9/'+m+'/'+b, cb.cp().mass([m,"*"]).bin([b]))
 
 
 print '>> Done!'

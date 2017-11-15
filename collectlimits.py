@@ -7,7 +7,7 @@ from array import array
 import os, string, math
 
 Channel=sys.argv[1]
-datadir='outputest/datacardsOct28/'
+datadir='outputest/datacardsNov9/'
 stopxsfile='inputshapes/stop_pair_13TeVxs.dat'
 stopxslist=[[float(element) for element in line.strip().split()] for line in open(stopxsfile).read().strip().split('\n')]
 stopxsdic={i[0]:i[1:] for i in stopxslist}
@@ -35,7 +35,7 @@ else:
     print 'There is NOT this Channel, check again! '
 
 
-outfile=open("LimitTable_"+Channel+"Oct28.txt","w")
+outfile=open("LimitTable_"+Channel+"Nov9.txt","w")
 
 masslist=getoutput('ls '+datadir).split('\n')
 
@@ -56,6 +56,8 @@ for mass in masslist:
 
         if cl == -1:
             obs=lim.limit
+            up_obs=obs*1.0/(1-(float(xsecErr)/100.))
+            dn_obs=obs*1.0/(1+(float(xsecErr)/100.))
 
         elif abs(cl-0.025) < 1E-4:
             m2s_exp=lim.limit
@@ -76,6 +78,8 @@ for mass in masslist:
     outfile.write('xsec=%s\n'%xsec)
     outfile.write('xsecErr=%s\n'%xsecErr)
     outfile.write('obsLimit=%s\n'%obs)
+    outfile.write('obs_up=%s\n'%up_obs)
+    outfile.write('obs_dn=%s\n'%dn_obs)
     outfile.write('expLimit=%s\n'%exp)
     outfile.write('exp_m2s=%s\n'%m2s_exp)
     outfile.write('exp_m1s=%s\n'%m1s_exp)
