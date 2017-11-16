@@ -31,19 +31,19 @@ combineTool.py -M Asymptotic -d */*/workspace.root --there -n .limit
 7, Collect the limits values(first modify the filenames in collectlimits.py):
 ```
 emacs collectlimits.py
-python collectlimits.py TAG
+python collectlimits.py Channelname
 ```
 
 ###########################################
 ## Plot limits
 
-1, Plot the obs and expected limits contours and save them into a root file.(can find the tag from previous output. Eg. LimitTable_ALLNov9.txt, then use `ALLNov9` as tag in the command, output will be `Contourplots/ALLNov9.root`)
+1, Plot the obs and expected limits contours and save them into a root file.(can find the tag from previous output. Eg. `LimitTable_ALLNov9.txt`, then use `ALLNov9` as tag in the command, output will be `Contourplots/ALLNov9.root`)
 ```
 cd plotMacro/
 python plotcontour.py tag
 ```
 
-2, Get the SUSY formatted plots.
+2, Get the SUSY formatted plots(need to change the inputs in `fx2016/T6ttZg_fx2016.cfg`).
 ```
 cd PlotsSMS
 cp ../Contourplots/ALLNov9.root fx2016/
@@ -56,4 +56,4 @@ EXTRA: change the limit plots axis range...
 emacs python/sms.py
 ```
 
-ALL DONE!
+### ALL DONE!
