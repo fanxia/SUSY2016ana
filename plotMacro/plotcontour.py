@@ -40,8 +40,8 @@ Gr2D_sigxsec=ROOT.TGraph2D()  #origin theory xsec, only depends on stop mass
 Gr2D_obsxsec=ROOT.TGraph2D()  #observed xsec, is theory_xsec*obsLimit, used as base color in limit plots
 Gr2D_expxsec=ROOT.TGraph2D()  #exp. xsec, is theory_xsec*expLimit
 Gr2D_obslimit=ROOT.TGraph2D() #observed limit, is obsLimit, compare with 1. link all the points of value 1, that's the contour
-Gr2D_obsmlimit=ROOT.TGraph2D()
-Gr2D_obsplimit=ROOT.TGraph2D()
+Gr2D_obsuplimit=ROOT.TGraph2D() #observed limit, is obsLimit, compare with 1. link all the points of value 1, that's the contour
+Gr2D_obsdnlimit=ROOT.TGraph2D() #observed limit, is obsLimit, compare with 1. link all the points of value 1, that's the contour
 Gr2D_explimit=ROOT.TGraph2D()
 Gr2D_expm1limit=ROOT.TGraph2D()
 Gr2D_expp1limit=ROOT.TGraph2D()
@@ -54,9 +54,13 @@ for line in file_in:
         mnlsp=float(filter(str.isdigit, line))
     elif 'xsec=' in line:
         xsec=float(line.split('=')[1])
-    elif 'obsLimit' in line:
+    elif 'obsLimit=' in line:
         obsLimit=float(line.split('=')[1])
-    elif 'expLimit' in line:
+    elif 'obs_up=' in line:
+        obs_up=float(line.split('=')[1])
+    elif 'obs_dn=' in line:
+        obs_dn=float(line.split('=')[1])
+    elif 'expLimit=' in line:
         expLimit=float(line.split('=')[1])
     elif 'exp_m1s' in line:
         exp_m1s=float(line.split('=')[1])
@@ -71,6 +75,8 @@ for line in file_in:
         Gr2D_obsxsec.SetPoint(ind,mstop,mnlsp,xsec*obsLimit)
         Gr2D_expxsec.SetPoint(ind,mstop,mnlsp,xsec*expLimit)
         Gr2D_obslimit.SetPoint(ind,mstop,mnlsp,obsLimit)
+        Gr2D_obsuplimit.SetPoint(ind,mstop,mnlsp,obs_up)
+        Gr2D_obsdnlimit.SetPoint(ind,mstop,mnlsp,obs_dn)
         Gr2D_explimit.SetPoint(ind,mstop,mnlsp,expLimit)
         Gr2D_expm1limit.SetPoint(ind,mstop,mnlsp,exp_m1s)
         Gr2D_expp1limit.SetPoint(ind,mstop,mnlsp,exp_p1s)
@@ -79,10 +85,12 @@ for line in file_in:
 
 # get contour tgraph: tgraph2d->getTH2F->getcontour
 contour_obslimit=GetContourTG(Gr2D_obslimit)
+contour_obsuplimit=GetContourTG(Gr2D_obsuplimit)
+contour_obsdnlimit=GetContourTG(Gr2D_obsdnlimit)
 contour_explimit=GetContourTG(Gr2D_explimit)
 contour_expm1limit=GetContourTG(Gr2D_expm1limit)
 contour_expp1limit=GetContourTG(Gr2D_expp1limit)
-
+hist_expxsec=Gr2D_expxsec.GetHistogram()
 
 
 
@@ -155,5 +163,13 @@ comment.Draw("same")
 c.Print("Contourplots/contour"+tag+".pdf")
 
 
+file_out.cd()
+contour_obslimit.Write("ObsLim")
+contour_obsuplimit.Write("ObsLimUp")
+contour_obsdnlimit.Write("ObsLimDn")
+contour_explimit.Write("ExpLim")
+contour_expm1limit.Write("ExpLimDn")
+contour_expp1limit.Write("ExpLimUp")
+hist_expxsec.Write("ExpXsec")
 file_out.Write()
 file_out.Close()        

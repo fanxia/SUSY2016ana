@@ -48,7 +48,9 @@ for mass in masslist:
 
     limitfile=TFile.Open(datadir+mass+ch+"higgsCombine.limit.Asymptotic.mH120.root")
     limitree=limitfile.Get("limit")
-    
+
+
+    obs,exp=0.0,0.0
     for lim in limitree:
 
 
@@ -72,7 +74,7 @@ for mass in masslist:
 
         else: continue
 
-
+    if obs==0.0 or exp==0.0: continue
     outfile.write('mstop=%s\n'%mstop)
     outfile.write('mnlsp=%s\n'%mnlsp)
     outfile.write('xsec=%s\n'%xsec)
