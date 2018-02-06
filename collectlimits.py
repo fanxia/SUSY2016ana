@@ -7,7 +7,7 @@ from array import array
 import os, string, math
 
 Channel=sys.argv[1]
-datadir='outputest/datacardsNov9/'
+datadir='outputest/datacardsJan24/'
 stopxsfile='inputshapes/stop_pair_13TeVxs.dat'
 stopxslist=[[float(element) for element in line.strip().split()] for line in open(stopxsfile).read().strip().split('\n')]
 stopxsdic={i[0]:i[1:] for i in stopxslist}
@@ -35,7 +35,7 @@ else:
     print 'There is NOT this Channel, check again! '
 
 
-outfile=open("LimitTable_"+Channel+"Nov9.txt","w")
+outfile=open("LimitTable_"+Channel+"Jan24.txt","w")
 
 masslist=getoutput('ls '+datadir).split('\n')
 
