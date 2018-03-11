@@ -31,6 +31,9 @@ class smsPlotBrazil(smsPlotABS):
         if self.model.diagOn:
             self.DrawDiagonal()
         self.DrawLines()
+        if self.model.diagNcom:
+            self.DrawDiagCom()
+
         self.DrawText()
         self.DrawLegend()
 

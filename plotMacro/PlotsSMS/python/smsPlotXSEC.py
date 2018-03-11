@@ -68,6 +68,8 @@ class smsPlotXSEC(smsPlotABS):
             self.DrawCorridor()
         if self.model.diagOn:
             self.DrawDiagonal()
+        if self.model.diagNcom:
+            self.DrawDiagCom()
         self.DrawText()
         self.DrawLegend()
         self.DrawPaletteLabel()

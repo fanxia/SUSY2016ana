@@ -29,6 +29,9 @@ class smsPlotCONT(smsPlotABS):
             self.DrawDiagonal()
         self.DrawObsArea()
         self.DrawLines()
+        if self.model.diagNcom:
+            self.DrawDiagCom()
+
         self.DrawText()
         self.DrawLegend()
 

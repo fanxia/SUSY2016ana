@@ -172,8 +172,10 @@ class sms():
         # model name
         self.modelname = "T6ttZg"
         # decay chain
-        lsp_s = "#lower[-0.12]{#tilde{#chi}}#lower[0.2]{#scale[0.85]{^{0}}}#kern[-1.3]{#scale[0.85]{_{1}}}"
-        self.label= "pp #rightarrow #tilde{t} #tilde{t#lower[0.6]{#scale[0.85]{^{*}}}}, #tilde{t} #rightarrow t"+lsp_s+" , "+lsp_s+" #rightarrow#gamma#tilde{G}";
+#        lsp_s = "#lower[-0.12]{#tilde{#chi}}#lower[0.2]{#scale[0.85]{^{0}}}#kern[-1.3]{#scale[0.85]{_{1}}}"
+        lsp_s = "#tilde{B}#lower[0.2]{#scale[0.85]{^{0}}}"
+#        self.label= "pp #rightarrow #tilde{t} #tilde{t#lower[0.8]{#scale[0.85]{^{*}}}}, #tilde{t} #rightarrow t"+lsp_s+" , "+lsp_s+" #rightarrow#gamma#tilde{G}";
+        self.label= "pp #rightarrow #tilde{t} #tilde{t}#lower[0.8]{#scale[0.85]{^{*}}}, #tilde{t} #rightarrow t"+lsp_s+" , "+lsp_s+" #rightarrow#gamma#tilde{G}";
         self.label2= "";
         # scan range to plot
         self.Xmin = 400.
@@ -183,9 +185,11 @@ class sms():
         self.Zmin = 0.003
         self.Zmax = 0.04
         # produce sparticle
-        self.sParticle = "m#kern[0.1]{_{#lower[-0.12]{#tilde{ t}}}} [GeV]"
+        self.sParticle = "m#kern[0.1]{_{#lower[-0.12]{ #tilde{t}}}} [GeV]"
         # LSP
         self.LSP = "m#kern[0.1]{_{"+lsp_s+"}} [GeV]"
         # turn off diagonal lines
         self.diagOn = False
         self.boxOn = False
+        self.diagNcom = True
+        self.diagcomment= "m#kern[0.1]{_{#lower[-0.12]{#tilde{t}}}} - "+lsp_s+" < m#kern[0.1]{_{#lower[-0.12]{t}}}"

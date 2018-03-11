@@ -303,3 +303,44 @@ class smsPlotABS(object):
         whitebox.SetFillColor(rt.kWhite)
         whitebox.Draw("FSAME")
         self.c.whitebox = whitebox
+
+
+
+    def DrawDiagCom(self):
+                ## lower left corner
+        mtop=172.5
+        x1 = self.model.Xmin 
+        y1 = self.model.Xmin-mtop 
+
+        ## lower right corner
+        x2 = self.model.Xmax
+        y2 = self.model.Xmax-mtop     
+        
+        ## upper right corner
+        x3 = self.model.Xmax
+        y3 = self.model.Ymax
+
+        ## upper left corner
+        x4 = self.model.Xmin
+        y4 = self.model.Ymax
+
+        whitebox = rt.TGraph(4, array('d',[x1,x2,x3,x4]), array('d',[y1,y2,y3,y4]))
+
+        whitebox.SetName("whitebox")
+        whitebox.SetFillColor(rt.kWhite)
+        whitebox.Draw("FSAME")
+        self.c.whitebox = whitebox
+
+        diagline = rt.TLine(x1, y1, x2, y2)
+#        diagline.SetName("diagline")
+        diagline.SetLineStyle(2)
+        diagline.SetLineWidth(2)
+        self.c.diagline = diagline
+
+        diagcomment = rt.TLatex(700, 550, self.model.diagcomment)
+#        diagcomment.SetName("diagcomment")
+        diagcomment.SetTextAngle(43)
+        diagcomment.SetTextSize(0.02)
+        self.c.diagcomment = diagcomment
+        diagline.Draw("SAME")
+        diagcomment.Draw("SAME")
