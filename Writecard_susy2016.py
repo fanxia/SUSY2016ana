@@ -16,11 +16,11 @@ masses=open(aux_shapes+'scanpointname.txt').read().splitlines()
 
 chns = ['eg', 'egg', 'mg', 'mgg']
 
-infile = {'eg':'Mar9_ELE.root', 'egg':'Mar9_ELE.root', 'mg':'Mar9_Mu.root','mgg':'Mar9_Mu.root'}
+infile = {'eg':'Oct16_ELE.root', 'egg':'Oct16_ELE.root', 'mg':'Oct16_Mu.root','mgg':'Oct16_Mu.root'}
 
 bkg_procs = { 'eg':["TT", "WJets", "ZJets","ST","Vgamma","TTV","TTG","VV"],
 #              'egg':["TT", "WJets", "ZJets","ST","Vgamma","TTV","TTG","VV"],
-              'egg':["TT", "ST","Vgamma","TTV","TTG"],
+              'egg':["TT", "ST","Vgamma","TTV","TTG","ZJets"],
               'mg':["TT", "WJets", "ZJets","ST","Vgamma","TTV","TTG","VV"],
               'mgg':["TT", "ST","Vgamma","TTV","TTG"]
 #              'mgg':["TT", "WJets", "ZJets","ST","Vgamma","TTV","TTG","VV"],
@@ -33,10 +33,10 @@ sig_procs = ['SMS_T6ttZg']
 #   (2, "Aug2_ELE_pfMET_SR2_ele_bjj"),
 #]
 cats = {
-'eg':[(1, "Mar9_ELE_pfMET_SR1_ele_bjj")],
-'egg':[(1, "Mar9_ELE_pfMET_SR2_ele_bjj")],
-'mg':[(1, "Mar9_Mu_pfMET_SR1_mu_bjj")],
-'mgg':[(1, "Mar9_Mu_pfMET_SR2_mu_bjj")] 
+'eg':[(1, "Oct16_ELE_pfMET_SR1_ele_bjj")],
+'egg':[(1, "Oct16_ELE_pfMET_SR2_ele_bjj")],
+'mg':[(1, "Oct16_Mu_pfMET_SR1_mu_bjj")],
+'mgg':[(1, "Oct16_Mu_pfMET_SR2_mu_bjj")] 
 }
 
 
@@ -65,6 +65,8 @@ stopxsdic={i[0]:i[1:] for i in stopxslist}
 for m in masses:
     xserr=(stopxsdic[float(filter(str.isdigit,m.split('_')[0]))][1]+100)/100.
     cb.cp().signals().AddSyst(cb, "sig_xsecErr","lnN",ch.SystMap()(xserr))
+cb.cp().process(sig_procs).AddSyst(cb, 'genMET', "shape", ch.SystMap()(1.0))
+
 
 
 # lumi uncertainty
@@ -75,31 +77,58 @@ cb.cp().process(["TT", "WJets", "ZJets","ST","Vgamma","TTV","TTG","VV"]).AddSyst
 
 #cb.cp().process([sig_procs+["TT", "WJets", "ZJets","ST","Vgamma","TTV","TTG","VV"]]).AddSyst(
 cb.cp().process(sig_procs+["TT", "WJets", "ZJets","ST","Vgamma","TTV","TTG","VV"]).AddSyst(cb, 'BbtagWeight', "shape", ch.SystMap()(1.0))
-cb.cp().process(sig_procs+["TT", "WJets", "ZJets","ST","Vgamma","TTV","TTG","VV"]).AddSyst(cb, 'BphoWeight', "shape", ch.SystMap()(1.0))
+cb.cp().process(["TT", "WJets", "ZJets","ST","Vgamma","TTV","TTG","VV"]).AddSyst(cb, 'BphoWeight', "shape", ch.SystMap()(1.0))
 cb.cp().channel(['mg','mgg']).process(["TT","TTV","TTG"]).AddSyst(cb, 'BtopPtWeight',"shape",ch.SystMap()(1.0))
 cb.cp().channel(['mg','mgg']).process(["TT", "WJets", "ZJets","ST","Vgamma","TTV","TTG","VV"]).AddSyst(cb, 'BJES',"shape",ch.SystMap()(1.0))
 #cb.cp().channel(['mgg']).process(["TT", "WJets", "ZJets","ST","Vgamma","TTV","TTG","VV"]).AddSyst(cb, 'BJES',"shape",ch.SystMap()(1.0))
 cb.cp().channel(['mg','mgg']).process(["TT", "WJets", "ZJets","ST","Vgamma","TTV","TTG","VV"]).AddSyst(cb, 'BmuWeight',"shape",ch.SystMap()(1.0))
 #cb.cp().channel(['mg','mgg']).process(["TT", "WJets", "ZJets","ST","Vgamma","TTV","TTG","VV"]).AddSyst(cb, 'BmuWeight',"shape",ch.SystMap()(1.0))
-cb.cp().channel(['mg']).process(["TT"]).AddSyst(cb,"gpuritysf","lnN",ch.SystMap()(1.1))
-cb.cp().channel(['mgg']).process(["TT"]).AddSyst(cb,"gpuritysf","lnN",ch.SystMap()(1.14))
+
+##cb.cp().channel(['mg']).process(["TT"]).AddSyst(cb,"gpuritysf","lnN",ch.SystMap()(1.1))
+##cb.cp().channel(['mgg']).process(["TT"]).AddSyst(cb,"gpuritysf","lnN",ch.SystMap()(1.14))
 cb.cp().channel(['mg']).process(["TTG"]).AddSyst(cb,"gpuritysf","lnN",ch.SystMap()(1.14))
-cb.cp().channel(['mgg']).process(["TTG"]).AddSyst(cb,"gpuritysf","lnN",ch.SystMap()(1.2))
+cb.cp().channel(['mgg']).process(["TTG"]).AddSyst(cb,"gpuritysf","lnN",ch.SystMap()(1.46))
+#cb.cp().channel(['mgg']).process(["TTG"]).AddSyst(cb,"gpuritysf","lnN",ch.SystMap()(1.2))
 cb.cp().channel(['mg','mgg']).process(["WJets"]).AddSyst(cb,"jetm3_wSF","lnN",ch.SystMap()(1.18))
-cb.cp().channel(['mg','mgg']).process(["TT"]).AddSyst(cb,"jetm3_wSF","lnN",ch.SystMap()(1.08))
+##cb.cp().channel(['mg','mgg']).process(["TT"]).AddSyst(cb,"jetm3_wSF","lnN",ch.SystMap()(1.08))
+
+cb.cp().channel(['mg']).process(["TT"]).AddSyst(cb,"comb","lnN",ch.SystMap()(1.13))
+cb.cp().channel(['mgg']).process(["TT"]).AddSyst(cb,"comb","lnN",ch.SystMap()(1.17))
+
+#### for >1bjets###
+#cb.cp().channel(['mg']).process(["TTG"]).AddSyst(cb,"gpuritysf","lnN",ch.SystMap()(1.17))
+#cb.cp().channel(['mgg']).process(["TTG"]).AddSyst(cb,"gpuritysf","lnN",ch.SystMap()(1.39))
+#cb.cp().channel(['mg','mgg']).process(["WJets"]).AddSyst(cb,"jetm3_wSF","lnN",ch.SystMap()(1.5))
+#cb.cp().channel(['mg']).process(["TT"]).AddSyst(cb,"comb","lnN",ch.SystMap()(1.17))
+#cb.cp().channel(['mgg']).process(["TT"]).AddSyst(cb,"comb","lnN",ch.SystMap()(1.26))
+#### END for >1bjets### 
 
 cb.cp().channel(['eg','egg']).process(["TT","TTV","TTG"]).AddSyst(cb, 'BtopPtWeight',"shape",ch.SystMap()(1.0))
 cb.cp().channel(['eg','egg']).process(["TT", "WJets", "ZJets","ST","Vgamma","TTV","TTG","VV"]).AddSyst(cb, 'BJES',"shape",ch.SystMap()(1.0))
 #cb.cp().channel(['egg']).process(["TT", "WJets", "ZJets","ST","Vgamma","TTV","TTG","VV"]).AddSyst(cb, 'BJES',"shape",ch.SystMap()(1.0))
 cb.cp().channel(['eg','egg']).process(["TT", "WJets", "ZJets","ST","Vgamma","TTV","TTG","VV"]).AddSyst(cb, 'BeleWeight',"shape",ch.SystMap()(1.0))
 #cb.cp().channel(['egg']).process(["TT", "WJets", "ZJets","ST","Vgamma","TTV","TTG","VV"]).AddSyst(cb, 'BeleWeight',"shape",ch.SystMap()(1.0))
-cb.cp().channel(['eg']).process(["TT"]).AddSyst(cb,"gpuritysf","lnN",ch.SystMap()(1.14))
-cb.cp().channel(['egg']).process(["TT"]).AddSyst(cb,"gpuritysf","lnN",ch.SystMap()(1.2))
+
+##cb.cp().channel(['eg']).process(["TT"]).AddSyst(cb,"gpuritysf","lnN",ch.SystMap()(1.14))
+##cb.cp().channel(['egg']).process(["TT"]).AddSyst(cb,"gpuritysf","lnN",ch.SystMap()(1.22))
 cb.cp().channel(['eg']).process(["TTG"]).AddSyst(cb,"gpuritysf","lnN",ch.SystMap()(1.18))
-cb.cp().channel(['egg']).process(["TTG"]).AddSyst(cb,"gpuritysf","lnN",ch.SystMap()(1.26))
-cb.cp().channel(['eg']).process(["ZJets"]).AddSyst(cb,"zjetsf","lnN",ch.SystMap()(1.45))
+cb.cp().channel(['egg']).process(["TTG"]).AddSyst(cb,"gpuritysf","lnN",ch.SystMap()(1.5))
+#cb.cp().channel(['egg']).process(["TTG"]).AddSyst(cb,"gpuritysf","lnN",ch.SystMap()(1.2))
+cb.cp().channel(['eg','egg']).process(["ZJets"]).AddSyst(cb,"zjetsf","lnN",ch.SystMap()(1.45))
 cb.cp().channel(['eg','egg']).process(["WJets"]).AddSyst(cb,"jetm3_wSF","lnN",ch.SystMap()(1.17))
-cb.cp().channel(['eg','egg']).process(["TT"]).AddSyst(cb,"jetm3_wSF","lnN",ch.SystMap()(1.09))
+##cb.cp().channel(['eg','egg']).process(["TT"]).AddSyst(cb,"jetm3_wSF","lnN",ch.SystMap()(1.09))
+
+cb.cp().channel(['eg']).process(["TT"]).AddSyst(cb,"comb","lnN",ch.SystMap()(1.16)) 
+cb.cp().channel(['egg']).process(["TT"]).AddSyst(cb,"comb","lnN",ch.SystMap()(1.24)) 
+
+#### for >1bjets###
+#cb.cp().channel(['eg']).process(["TTG"]).AddSyst(cb,"gpuritysf","lnN",ch.SystMap()(1.19))
+#cb.cp().channel(['egg']).process(["TTG"]).AddSyst(cb,"gpuritysf","lnN",ch.SystMap()(1.66))
+#cb.cp().channel(['eg','egg']).process(["ZJets"]).AddSyst(cb,"zjetsf","lnN",ch.SystMap()(1.45))
+#cb.cp().channel(['eg','egg']).process(["WJets"]).AddSyst(cb,"jetm3_wSF","lnN",ch.SystMap()(1.46))
+#cb.cp().channel(['eg']).process(["TT"]).AddSyst(cb,"comb","lnN",ch.SystMap()(1.19))
+#cb.cp().channel(['egg']).process(["TT"]).AddSyst(cb,"comb","lnN",ch.SystMap()(1.36))
+#### END for >1bjets###
 
 
 #xsec error
@@ -138,18 +167,18 @@ writer = ch.CardWriter('$TAG/$ANALYSIS_$CHANNEL_$BINID_$ERA_$MASS.txt',
 #for b in bins :
 for m in masses :
 #        print "Writing datacard for bin: " +b + " and mass: " + m+"\n" 
-        writer.WriteCards('outputest/datacardsMar9/'+m+'/All', cb.cp().mass([m,"*"]))
-        for b in bins[0:2]:
-            writer.WriteCards('outputest/datacardsMar9/'+m+'/ELE', cb.cp().mass([m,"*"]).bin([b]))
-        for b in bins[2:4]:
-            writer.WriteCards('outputest/datacardsMar9/'+m+'/MU', cb.cp().mass([m,"*"]).bin([b]))
-        for b in [bins[0],bins[2]]:
-            writer.WriteCards('outputest/datacardsMar9/'+m+'/SR1', cb.cp().mass([m,"*"]).bin([b]))
-        for b in [bins[1],bins[3]]:
-            writer.WriteCards('outputest/datacardsMar9/'+m+'/SR2', cb.cp().mass([m,"*"]).bin([b]))
+        writer.WriteCards('outputest/datacardsOct16/'+m+'/All', cb.cp().mass([m,"*"]))
+        # for b in bins[0:2]:
+        #     writer.WriteCards('outputest/datacardsMay41/'+m+'/ELE', cb.cp().mass([m,"*"]).bin([b]))
+        # for b in bins[2:4]:
+        #     writer.WriteCards('outputest/datacardsMay41/'+m+'/MU', cb.cp().mass([m,"*"]).bin([b]))
+        # for b in [bins[0],bins[2]]:
+        #     writer.WriteCards('outputest/datacardsJul10/'+m+'/SR1', cb.cp().mass([m,"*"]).bin([b]))
+        # for b in [bins[1],bins[3]]:
+        #     writer.WriteCards('outputest/datacardsMay41/'+m+'/SR2', cb.cp().mass([m,"*"]).bin([b]))
 
-        for b in bins:
-            writer.WriteCards('outputest/datacardsMar9/'+m+'/'+b, cb.cp().mass([m,"*"]).bin([b]))
+        # for b in bins:
+        #     writer.WriteCards('outputest/datacardsMay41/'+m+'/'+b, cb.cp().mass([m,"*"]).bin([b]))
 
 
 print '>> Done!'

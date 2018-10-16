@@ -128,7 +128,7 @@ nlspCommentB = ROOT.TLatex(650, 500, "m_{ #tilde{t}} < m_{ Bino}+m_{ t}");
 nlspCommentB.SetTextAngle(35);
 nlspCommentB.SetTextSize(0.025);
 
-comment = ROOT.TLatex(400, 1000, 'MU');
+comment = ROOT.TLatex(400, 1000, 'SR1');
 #      comment.SetTextAngle(40);                                                                                                             
 comment.SetTextSize(0.05);
 
@@ -151,9 +151,11 @@ contour_explimit.SetLineStyle(7)
 contour_explimit.Draw("same")
 contour_expm1limit.SetLineStyle(2)
 contour_expp1limit.SetLineStyle(2)
-#contour_expm1limit.Draw("same")
-#contour_expp1limit.Draw("same")
-
+contour_expm1limit.Draw("same")
+contour_expp1limit.Draw("same")
+contour_obslimit.Draw("same")
+contour_obsuplimit.Draw("same")
+contour_obsdnlimit.Draw("same")
 
 virtualLineA.Draw("same")
 virtualLineB.Draw("same")

@@ -1,0 +1,45 @@
+# Datacard produced by CombineHarvester with git status: analysis-HIG-16-006-freeze-080416-276-g7cedd49-dirty
+imax    1 number of bins
+jmax    6 number of processes minus 1
+kmax    * number of nuisance parameters
+--------------------------------------------------------------------------------
+shapes * FX_egg_1_13TeV FX_egg.input.root FX_egg_1_13TeV/$PROCESS FX_egg_1_13TeV/$PROCESS_$SYSTEMATIC
+shapes SMS_T6ttZg FX_egg_1_13TeV FX_egg.input.root FX_egg_1_13TeV/SMS_T6ttZgMst1000_Mnl10 FX_egg_1_13TeV/SMS_T6ttZgMst1000_Mnl10_$SYSTEMATIC
+--------------------------------------------------------------------------------
+bin          FX_egg_1_13TeV  
+observation  35.0            
+--------------------------------------------------------------------------------
+bin                                                               FX_egg_1_13TeV  FX_egg_1_13TeV  FX_egg_1_13TeV  FX_egg_1_13TeV  FX_egg_1_13TeV  FX_egg_1_13TeV  FX_egg_1_13TeV  
+process                                                           TT              ST              Vgamma          TTV             TTG             ZJets           SMS_T6ttZg      
+process                                                           1               2               3               4               5               6               0               
+rate                                                              7.56962         0.273096        3.8916          0.412049        12.4371         3.65923         0.738736        
+--------------------------------------------------------------------------------
+BJES                                                      shape   1               1               1               1               1               1               -               
+BbtagWeight                                               shape   1               1               1               1               1               1               1               
+BeleWeight                                                shape   1               1               1               1               1               1               -               
+BphoWeight                                                shape   1               1               1               1               1               1               -               
+BtopPtWeight                                              shape   1               -               -               1               1               -               -               
+CMS_FX_egg_Oct15_ELE_pfMET_SR2_ele_bjj_13TeV_ST_bin_1     shape   -               1               -               -               -               -               -               
+CMS_FX_egg_Oct15_ELE_pfMET_SR2_ele_bjj_13TeV_ST_bin_2     shape   -               1               -               -               -               -               -               
+CMS_FX_egg_Oct15_ELE_pfMET_SR2_ele_bjj_13TeV_ST_bin_3     shape   -               1               -               -               -               -               -               
+CMS_FX_egg_Oct15_ELE_pfMET_SR2_ele_bjj_13TeV_TTG_bin_1    shape   -               -               -               -               1               -               -               
+CMS_FX_egg_Oct15_ELE_pfMET_SR2_ele_bjj_13TeV_TTG_bin_2    shape   -               -               -               -               1               -               -               
+CMS_FX_egg_Oct15_ELE_pfMET_SR2_ele_bjj_13TeV_TTG_bin_3    shape   -               -               -               -               1               -               -               
+CMS_FX_egg_Oct15_ELE_pfMET_SR2_ele_bjj_13TeV_TTG_bin_4    shape   -               -               -               -               1               -               -               
+CMS_FX_egg_Oct15_ELE_pfMET_SR2_ele_bjj_13TeV_TTV_bin_1    shape   -               -               -               1               -               -               -               
+CMS_FX_egg_Oct15_ELE_pfMET_SR2_ele_bjj_13TeV_TTV_bin_2    shape   -               -               -               1               -               -               -               
+CMS_FX_egg_Oct15_ELE_pfMET_SR2_ele_bjj_13TeV_TTV_bin_3    shape   -               -               -               1               -               -               -               
+CMS_FX_egg_Oct15_ELE_pfMET_SR2_ele_bjj_13TeV_TTV_bin_4    shape   -               -               -               1               -               -               -               
+CMS_FX_egg_Oct15_ELE_pfMET_SR2_ele_bjj_13TeV_TT_bin_1     shape   1               -               -               -               -               -               -               
+CMS_FX_egg_Oct15_ELE_pfMET_SR2_ele_bjj_13TeV_TT_bin_2     shape   1               -               -               -               -               -               -               
+CMS_FX_egg_Oct15_ELE_pfMET_SR2_ele_bjj_13TeV_TT_bin_3     shape   1               -               -               -               -               -               -               
+CMS_FX_egg_Oct15_ELE_pfMET_SR2_ele_bjj_13TeV_TT_bin_4     shape   1               -               -               -               -               -               -               
+CMS_FX_egg_Oct15_ELE_pfMET_SR2_ele_bjj_13TeV_Vgamma_bin_1 shape   -               -               1               -               -               -               -               
+CMS_FX_egg_Oct15_ELE_pfMET_SR2_ele_bjj_13TeV_Vgamma_bin_2 shape   -               -               1               -               -               -               -               
+comb                                                      lnN     1.24            -               -               -               -               -               -               
+genMET                                                    shape   -               -               -               -               -               -               1               
+gpuritysf                                                 lnN     -               -               -               -               1.5             -               -               
+lumi_13TeV                                                lnN     1.025           1.025           1.025           1.025           1.025           1.025           1.025           
+pileup_13TeV                                              lnN     1.046           1.046           1.046           1.046           1.046           1.046           -               
+sig_xsecErr                                               lnN     -               -               -               -               -               -               1.13922         
+zjetsf                                                    lnN     -               -               -               -               -               1.45            -               

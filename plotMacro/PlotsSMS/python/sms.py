@@ -173,23 +173,28 @@ class sms():
         self.modelname = "T6ttZg"
         # decay chain
 #        lsp_s = "#lower[-0.12]{#tilde{#chi}}#lower[0.2]{#scale[0.85]{^{0}}}#kern[-1.3]{#scale[0.85]{_{1}}}"
-        lsp_s = "#tilde{B}#lower[0.2]{#scale[0.85]{^{0}}}"
+#        lsp_s = "#tilde{B}#lower[0.2]{#scale[0.85]{^{0}}}"
 #        self.label= "pp #rightarrow #tilde{t} #tilde{t#lower[0.8]{#scale[0.85]{^{*}}}}, #tilde{t} #rightarrow t"+lsp_s+" , "+lsp_s+" #rightarrow#gamma#tilde{G}";
-        self.label= "pp #rightarrow #tilde{t} #tilde{t}#lower[0.8]{#scale[0.85]{^{*}}}, #tilde{t} #rightarrow t"+lsp_s+" , "+lsp_s+" #rightarrow#gamma#tilde{G}";
+#        self.label= "pp #rightarrow #tilde{t} #tilde{t}#lower[0.8]{#scale[0.85]{^{*}}}, #tilde{t} #rightarrow t"+lsp_s+" , "+lsp_s+" #rightarrow#gamma/H^{0}#tilde{G}";
+
+        # T6ttZg->chi2->chi1
+        nlsp_s = "#lower[-0.12]{#tilde{#chi}}#lower[0.2]{#scale[0.8]{^{0}}}#kern[-1]{#scale[0.8]{_{2}}}"
+        lsp_s = "#lower[-0.12]{#tilde{#chi}}#lower[0.2]{#scale[0.8]{^{0}}}#kern[-1.3]{#scale[0.8]{_{1}}}"
+        self.label= "pp #rightarrow #tilde{t} #tilde{t}#lower[0.8]{#scale[0.85]{^{*}}}, #tilde{t} #rightarrow t"+nlsp_s+" , "+nlsp_s+" #rightarrow#gamma/Z"+lsp_s;
         self.label2= "";
         # scan range to plot
         self.Xmin = 400.
         self.Xmax = 1500.
         self.Ymin = 50.
         self.Ymax = 1400.
-        self.Zmin = 0.003
-        self.Zmax = 0.04
+        self.Zmin = 0.02
+        self.Zmax = 0.1
         # produce sparticle
         self.sParticle = "m#kern[0.1]{_{#lower[-0.12]{ #tilde{t}}}} [GeV]"
         # LSP
-        self.LSP = "m#kern[0.1]{_{"+lsp_s+"}} [GeV]"
+        self.LSP = "m#kern[0.1]{_{"+nlsp_s+"}} [GeV]"
         # turn off diagonal lines
         self.diagOn = False
         self.boxOn = False
         self.diagNcom = True
-        self.diagcomment= "m#kern[0.1]{_{#lower[-0.12]{#tilde{t}}}} - "+lsp_s+" < m#kern[0.1]{_{#lower[-0.12]{t}}}"
+        self.diagcomment= "m#kern[0.1]{_{#lower[-0.12]{#tilde{t}}}} - "+nlsp_s+" < m#kern[0.1]{_{#lower[-0.12]{t}}}"
